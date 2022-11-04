@@ -149,7 +149,14 @@ class DatabaseWrapper(BaseDatabaseWrapper):
             connection_params.update(self.settings_dict['CLIENT'])
         except KeyError:
             pass
-
+        if self.settings_dict.get("USER"):
+            connection_params["user"] = self.settings_dict["USER"]
+        if self.settings_dict.get("PASSWORD"):
+            connection_params["password"] = self.settings_dict["PASSWORD"]
+        if self.settings_dict.get("HOST"):
+            connection_params["host"] = self.settings_dict["HOST"]
+        if self.settings_dict.get("PORT"):
+            connection_params["port"] = self.settings_dict["PORT"]
         return connection_params
 
     def get_new_connection(self, connection_params):
